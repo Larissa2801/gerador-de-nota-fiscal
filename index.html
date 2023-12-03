@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Gerador de NF-e</title>
+</head>
+<body>
+  <h2>Gerador de NF-e</h2>
+  <form id="nfForm">
+    <label for="cliente">Nome do Cliente:</label>
+    <input type="text" id="cliente" required>
+
+    <label for="valor">Valor da Compra:</label>
+    <input type="number" id="valor" required>
+
+    <label for="icms">Alíquota ICMS (%):</label>
+    <input type="number" id="icms" required>
+
+    <label for="ipi">Alíquota IPI (%):</label>
+    <input type="number" id="ipi" required>
+
+    <button type="button" onclick="gerarNF()">Gerar NF-e</button>
+  </form>
+
+  <script>
+    function gerarNF() {//FUNÇÃO EH CHAMADA QUANDO O BOTAO E PRECIONADO
+      var cliente = document.getElementById("cliente").value;//PEGA O NOME PELO ID CLIENTE E ARMAZENA NA VARIAVEL CLIENTE
+      var valor = parseFloat(document.getElementById("valor").value);//MESMA SINTAXE QUE O DE CIMA
+      var icms = parseFloat(document.getElementById("icms").value);
+      var ipi = parseFloat(document.getElementById("ipi").value);
+
+      // LOGICA PARA CALCULOS ICMS E IPI
+      var valorICMS = (icms / 100) * valor;
+      var valorIPI = (ipi / 100) * valor;
+
+      // EXIBINDO OS RESULTADOS 
+      alert("Cliente: " + cliente +
+            "\nValor da Compra: R$ " + valor.toFixed(2) +
+            "\nICMS: R$ " + valorICMS.toFixed(2) +
+            "\nIPI: R$ " + valorIPI.toFixed(2) +
+            "\nTotal: R$ " + (valor + valorICMS + valorIPI).toFixed(2));
+    }
+  </script>
+</body>
+</html>
